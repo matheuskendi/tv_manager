@@ -169,14 +169,34 @@ const Player: React.FC<PlayerProps> = ({ tvId, onLogout }) => {
   );
 
   if (loading || !playlistMedia || playlistMedia.length === 0) return (
-      <div className="min-h-screen bg-black flex flex-col items-center justify-center text-white">
+      <div className="relative min-h-screen bg-black flex flex-col items-center justify-center text-white">
+
+        {/* Botão Logout no canto superior direito (padrão) */}
+        <div className="absolute top-4 right-4 z-50 opacity-30 hover:opacity-100 focus-within:opacity-100 transition-opacity">
+          <button
+              onClick={onLogout}
+              className="p-3 bg-white/10 rounded-full text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              aria-label="Sair"
+          >
+            <LogOut size={24}/>
+          </button>
+        </div>
+
         {loading ? (
             <Loader2 className="w-12 h-12 animate-spin text-indigo-500" />
         ) : (
-            <>
+            <div className="flex flex-col items-center">
               <MonitorOff className="w-16 h-16 text-slate-700 mb-4" />
-              <p className="text-slate-500">Aguardando envio de playlist...</p>
-            </>
+              <p className="text-slate-500 mb-6">Aguardando envio de playlist...</p>
+
+              {/* Botão extra no meio da tela para facilitar na TV */}
+              <button
+                  onClick={onLogout}
+                  className="px-6 py-3 bg-slate-800 hover:bg-slate-700 focus:bg-slate-700 text-slate-300 hover:text-white rounded-full font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              >
+                Voltar para Login
+              </button>
+            </div>
         )}
       </div>
   );
