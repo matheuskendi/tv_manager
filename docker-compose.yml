@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  # ⚙️ Back-end (NestJS)
+  nexus-api:
+    build: ./nexus-api
+    container_name: nexus_api
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      # 🔗 Usando a URL que você passou (já com o @ e ! codificados corretamente)
+      - DATABASE_URL=mysql://admtvs:1q2w3e4r5t6y7u8i9o%40A%21@172.16.0.34:3306/cm_mkt_tvs
+      - JWT_SECRET=QW24Tbvz3DTGue
+    volumes:
+      - ./nexus-api/uploads:/app/uploads 
+
+  # 💻 Front-end (React + Vite)
+  nexus-web:
+    build: ./projeto-nexus
+    container_name: nexus_web
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - nexus-api
