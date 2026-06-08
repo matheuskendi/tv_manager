@@ -1,0 +1,23 @@
+### list usuarios
+GET http://localhost:3000/
+### get usuarios
+GET http://localhost:3000/
+
+### POST usuarios
+POST http://localhost:3000/playlists
+Content-Type: application/json 
+
+{
+      "name": "playlistteste2",
+      "created_by": "0f48fc26-e7dd-4462-9045-e596f31dd1f2"
+}
+
+### PATCH usuarios
+PATCH http://localhost:3000/
+Content-Type: application/json 
+
+{
+      "email": "teste@gmail.com"
+}
+### DELETE usuarios
+DELETE http://localhost:3000/

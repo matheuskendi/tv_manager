@@ -1,0 +1,30 @@
+### list MEDIA
+GET http://localhost:3000/media
+
+
+### GET MEDIA
+GET http://localhost:3000/media/1
+
+
+### POST MEDIA
+POST http://localhost:3000/media
+Content-Type: application/json
+
+{
+      "name": "Playlist teste",
+      "type": "image",
+      "url": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweoIqpBWFzlbuQwN5f8YMeA2B4XXD5BpcdBN9n4Tu1xpKkOhiiKOX5iev4Gx3bsFR9g9dZJzr3EFh6vnnwQz_yr7Qbpu4RQimkpKIl7qOIrnk4N74Q0TMOqW-7wqfLNPSnyJZmzi=s294-w294-h220-k-no",
+      "duration": 10
+}
+
+
+### PATCH MEDIA
+PATCH http://localhost:3000/media/95b3366c-e1fb-4b5c-8b46-77a348758ca7
+Content-Type: application/json
+
+{
+      "type": "video"
+}
+
+### DELETE
+DELETE http://localhost:3000/media/95b3366c-e1fb-4b5c-8b46-77a348758ca7

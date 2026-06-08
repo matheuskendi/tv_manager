@@ -1,0 +1,27 @@
+### list tv_devices
+GET http://localhost:3000/
+
+### get tv_devices
+GET http://localhost:3000/
+
+### POST usuarios
+POST http://localhost:3000/tv-devices
+Content-Type: application/json 
+
+{
+      "name": "playlistteste2",
+      "password": "0f48fc26-e7dd-4462-9045-e596f31dd1f2",
+      "playlist_id": "c1b61b92-fdcd-4b32-a187-56b8d11cf556"
+}
+
+### PATCH usuarios
+PATCH http://localhost:3000/tv-devices/a96cecc5-f7c9-421b-8246-5e82c23b93cc
+Content-Type: application/json 
+
+{
+      "name": "Teste Atualizado"
+}
+### DELETE usuarios
+DELETE http://localhost:3000/
+
+

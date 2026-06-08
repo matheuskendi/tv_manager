@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model admin_users {
+  id            String      @id @default(uuid())
+  name          String      @db.VarChar(255)
+  email         String      @unique(map: "email") @db.VarChar(255)
+  password_hash String      @db.VarChar(255)
+  created_at    DateTime?   @default(now()) @db.Timestamp(0)
+  playlists     playlists[]
+  medias        medias[]
+  tv_devices    tv_devices[]
+}
+
+model medias {
+  id             String           @id @default(uuid())
+  name           String           @db.VarChar(255)
+  type           String           @db.VarChar(20)
+  url            String           @db.Text
+  duration       Int?             @default(0)
+  created_at     DateTime?        @default(now()) @db.Timestamp(0)
+
+  admin_id       String           
+  admin_users    admin_users      @relation(fields: [admin_id], references: [id])
+  playlist_items playlist_items[]
+}
+
+model playlist_items {
+  id            String    @id @default(uuid())
+  playlist_id   String    
+  media_id      String    
+  display_order Int
+  medias        medias    @relation(fields: [media_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_media")
+  playlists     playlists @relation(fields: [playlist_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_playlist")
+
+  @@index([media_id], map: "fk_media")
+  @@index([playlist_id], map: "fk_playlist")
+}
+
+model playlists {
+  id                String           @id @default(uuid())
+  name              String           @db.VarChar(255)
+  created_by        String?          
+  created_at        DateTime?        @default(now()) @db.Timestamp(0)
+  playlist_items    playlist_items[]
+  admin_users       admin_users?     @relation(fields: [created_by], references: [id], onUpdate: NoAction, map: "fk_playlist_owner")
+  tv_devices        tv_devices[]
+
+  @@index([created_by], map: "fk_playlist_owner")
+}
+
+model tv_devices {
+  id          String     @id @default(uuid())
+  name        String     @db.VarChar(255) @unique
+  password_hash String      @db.VarChar(255)
+  playlist_id String?    
+  created_at  DateTime?  @default(now()) @db.Timestamp(0)
+  admin_id    String
+
+  playlists   playlists? @relation(fields: [playlist_id], references: [id], onUpdate: NoAction, map: "fk_tv_playlist")
+  admin_users admin_users @relation(fields: [admin_id], references: [id])
+
+  @@index([playlist_id], map: "fk_tv_playlist")
+}
