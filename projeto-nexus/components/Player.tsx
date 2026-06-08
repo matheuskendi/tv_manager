@@ -210,10 +210,14 @@ const Player: React.FC<PlayerProps> = ({ tvId, onLogout }) => {
             />
         )}
 
-        {/* Botão Logout Escondido */}
-        <div className="absolute top-4 right-4 z-50 opacity-0 hover:opacity-100 transition-opacity">
-          <button onClick={onLogout} className="p-2 bg-black/40 rounded-full text-white/60 hover:text-white">
-            <LogOut size={20}/>
+        {/* Botão Logout Visível e Acessível */}
+        <div className="absolute top-4 right-4 z-50 opacity-30 hover:opacity-100 focus-within:opacity-100 transition-opacity">
+          <button
+              onClick={onLogout}
+              className="p-3 bg-black/60 rounded-full text-white hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              aria-label="Sair"
+          >
+            <LogOut size={24}/>
           </button>
         </div>
       </div>
